@@ -7,7 +7,7 @@ from cozmo.util import degrees, distance_inches, speed_mmps
 def victoryDance(robot):
     robot.play_anim_trigger(cozmo.anim.Triggers.CodeLabVictory).wait_for_completed()
     robot.turn_in_place(degrees(180)).wait_for_completed()
-    robot.play_anim_trigger(cozmo.anim.Triggers.DanceMambo).wait_for_completed() # this dance is kinda long
+    robot.play_anim_trigger(cozmo.anim.Triggers.CodeLabVictory).wait_for_completed()
     robot.say_text("Yay for computer science!").wait_for_completed()
 
 ########## Utility Functions ##########
@@ -76,7 +76,7 @@ def main(robot: cozmo.robot.Robot):
         driveInches(robot, 14.2)  # Second "T" to Finish Line
 
     # TODO uncomment the victoryDance() function call below (disabled for route testing efficiency)
-    # victoryDance(robot)
+    victoryDance(robot)
 
 ########## Run Program ##########
 cozmo.run_program(main)
