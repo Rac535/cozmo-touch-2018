@@ -52,17 +52,83 @@ def path1(robot):
     
     turnLeft(robot)
     driveInches(robot, 10)  # Second "T" to Finish Line
+    robot.say_text("Hello?").wait_for_completed()
+    robot.say_text("Cozmo wondered where everyone went",use_cozmo_voice=False,duration_scalar=0.6).wait_for_completed()
+
+    
   
     turnLeft(robot)
     driveInches(robot, 10)  # Second "T" to Finish Line
     
     turnRight(robot)
-    driveInches(robot, 10)  # Second "T" to Finish Line 
+    driveInches(robot, 10)  # Second "T" to Finish Line
+    
     
     #PounceOnMotion = _BehaviorType(name='PounceOnMotion', id=6)
     victoryDance(robot)
     
+    
 def path2(robot):    
+    #start forward
+    
+    driveInches(robot, 9)
+    #robot.play_anim_trigger(cozmo.anim.Triggers.CodeLabTiger).wait_for_completed()   
+    robot.say_text("woah, at least that was soft").wait_for_completed()
+    robot.say_text("Which way!").wait_for_completed()
+    #cube = robot.world.wait_for(cozmo.objects.EvtObjectTapped) # Tapping any cube will send him the correct way for now
+    #print(cube)
+    #num = cube.obj # this doesn't work to grab the cube number. I'm probably missing some basic OOP skills here
+
+    robot.play_audio(cozmo.audio.AudioEvents.MusicFunLoop)
+    
+    
+    turnLeft(robot)
+    driveInches(robot, 10)  # Second "T" to Finish Line
+    
+    turnLeft(robot)
+    driveInches(robot, 10) 
+    robot.say_text("Ouch! this is hard!").wait_for_completed()
+    robot.say_text("Cozmo was scared. How was he going to get out of the mueseum?",use_cozmo_voice=False,duration_scalar=0.6).wait_for_completed()
+    
+    turnRight(robot)
+    turnRight(robot)
+    driveInches(robot, 20)
+    robot.say_text("whew! this is much softer!").wait_for_completed()
+    robot.say_text("Cozmo bumped into something soft",use_cozmo_voice=False,duration_scalar=0.6).wait_for_completed()
+    robot.say_text("Cozmo remembers that there was a soft couch in the east wing",use_cozmo_voice=False,duration_scalar=0.6).wait_for_completed()
+    robot.say_text("He must be in the east wing",use_cozmo_voice=False,duration_scalar=0.6).wait_for_completed()
+
+    
+    turnRight(robot)
+    driveInches(robot, 10)
+    
+    turnRight(robot)
+    driveInches(robot, 10)
+    
+    
+    turnLeft(robot)
+    driveInches(robot, 10) 
+    
+    
+    turnLeft(robot)
+    driveInches(robot, 10)
+    robot.say_text("I can see the exit sign!",duration_scalar=0.6 ).wait_for_completed()
+ 
+    robot.say_text("Cozmo is almost there",use_cozmo_voice=False,duration_scalar=0.6).wait_for_completed()
+    driveInches(robot, 10)  # Second "T" to Finish Line 
+    
+    
+    #PounceOnMotion = _BehaviorType(name='PounceOnMotion', id=6)
+    victoryDance(robot)
+    
+    robot.play_audio(cozmo.audio.AudioEvents.MusicFunLoopStop)
+    return
+    
+        
+    
+    
+    
+def path3(robot):    
     #start forward
 
     driveInches(robot, 9)
@@ -107,7 +173,16 @@ def path2(robot):
     driveInches(robot, 5)  # Second "T" to Finish Line 
 
 
-def path3(robot):    
+
+    
+    
+    
+    
+    #change this path from the exact same as 2!!!
+    #VVVVVVVVVVVv
+    
+    
+def path4(robot):    
     #start forward
     
     driveInches(robot, 9)
@@ -124,19 +199,11 @@ def path3(robot):
     turnLeft(robot)
     driveInches(robot, 10)  # Second "T" to Finish Line
     
-    turnLeft(robot)
+    turnRight(robot)
     driveInches(robot, 10) 
-    robot.say_text("Ouch! this is hard!").wait_for_completed()
-    robot.say_text("Cozmo was scared. How was he going to get out of the mueseum?",use_cozmo_voice=False).wait_for_completed()
-    
-    turnRight(robot)
-    turnRight(robot)
-    driveInches(robot, 20)
-    robot.say_text("whew! this is much softer!").wait_for_completed()
-    robot.say_text("Cozmo bumped into something soft",use_cozmo_voice=False,duration_scalar=0.6).wait_for_completed()
+    robot.say_text("This is soft!").wait_for_completed()
     robot.say_text("Cozmo remembers that there was a soft couch in the east wing",use_cozmo_voice=False,duration_scalar=0.6).wait_for_completed()
     robot.say_text("He must be in the east wing",use_cozmo_voice=False,duration_scalar=0.6).wait_for_completed()
-
     
     turnRight(robot)
     driveInches(robot, 10)
@@ -151,9 +218,12 @@ def path3(robot):
     
     turnLeft(robot)
     driveInches(robot, 10)
-    robot.say_text("I can see the exit sign!",duration_scalar=0.6 ).wait_for_completed()
+    robot.say_text("I can see the exit sign!",duration_scalar=0.4 ).wait_for_completed()
  
     robot.say_text("Cozmo is almost there",use_cozmo_voice=False,duration_scalar=0.6).wait_for_completed()
+    robot.say_text("So ",use_cozmo_voice=False,duration_scalar=0.8).wait_for_completed()
+    robot.say_text("Close ",use_cozmo_voice=False,duration_scalar=0.4).wait_for_completed()
+
     driveInches(robot, 10)  # Second "T" to Finish Line 
     
     
@@ -163,7 +233,6 @@ def path3(robot):
     robot.play_audio(cozmo.audio.AudioEvents.MusicFunLoopStop)
     return
     
-    
 ########## Main ##########
 def main(robot: cozmo.robot.Robot):
     robot.say_text("Cozmo went on a field trip with his class and fell asleep. Oh no, his class left and the museum closed",use_cozmo_voice=False,duration_scalar=0.6).wait_for_completed()
@@ -172,7 +241,11 @@ def main(robot: cozmo.robot.Robot):
 
     
     
-    path3(robot)
+    path2(robot)
+    robot.say_text("Cozmo finally made it out of the museum",use_cozmo_voice=False,duration_scalar=0.6).wait_for_completed()
+    robot.say_text("Cozmo learned that day that if you can't see",use_cozmo_voice=False,duration_scalar=0.6).wait_for_completed()
+    robot.say_text("you might be able to feel your way out of a situation",use_cozmo_voice=False,duration_scalar=0.6).wait_for_completed()
+
     robot.play_audio(cozmo.audio.AudioEvents.MusicGlobalStop)
     
 ########## Run Program ##########
