@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 '''
 TODO : Add lots of comments here for Dr. Miller to enjoy.
+TODO : Add code from manual mode to this program?
 Team Name
 Our Names
 Dates
@@ -26,6 +27,12 @@ def victoryDance(robot):
 
     robot.play_audio(cozmo.audio.AudioEvents.MusicStyle80S1159BpmLoopStop)
 
+def resetNarration(robot):
+    robot.say_text("Please place cozmo in the starting location.", use_cozmo_voice=False,
+                   duration_scalar=0.6).wait_for_completed()
+    robot.say_text("Tap any cube when ready to continue.", use_cozmo_voice=False,
+                    duration_scalar=0.6).wait_for_completed()
+
 ########## Utility Functions ##########
 def driveInches(robot, inches):
     robot.drive_straight(distance_inches(inches), speed_mmps(80)).wait_for_completed()
@@ -48,18 +55,10 @@ def path1(robot):
     robot.play_anim_trigger(cozmo.anim.Triggers.CodeLabTiger).wait_for_completed()
     robot.say_text("woah, at least that was soft").wait_for_completed()
 
-    #  these lines below are for the future use of cube-tap navigation
-    #robot.say_text("Which way!").wait_for_completed()
-    #cube = robot.world.wait_for(cozmo.objects.EvtObjectTapped) # Tapping any cube will send him the correct way for now
-    #print(cube)
-    #num = cube.obj # this doesn't work to grab the cube number. I'm probably missing some basic OOP skills here
-
     turnRight(robot)
     driveInches(robot, 11)
     robot.say_text("Ouch! this is hard!").wait_for_completed()
     robot.say_text("Now where do I go!").wait_for_completed()
-
-    #cube = robot.world.wait_for(cozmo.objects.EvtObjectTapped) # Tapping any cube will send him the correct way for now
     
     turnLeft(robot)
     driveInches(robot, 10.75)
@@ -86,12 +85,6 @@ def path2(robot):
     driveInches(robot, 6.5)
     robot.play_anim_trigger(cozmo.anim.Triggers.CodeLabTiger).wait_for_completed()
     robot.say_text("woah, at least that was soft").wait_for_completed()
-
-    #  these lines below are for the future use of cube-tap navigation
-    #robot.say_text("Which way!").wait_for_completed()
-    #cube = robot.world.wait_for(cozmo.objects.EvtObjectTapped) # Tapping any cube will send him the correct way for now
-    #print(cube)
-    #num = cube.obj # this doesn't work to grab the cube number. I'm probably missing some basic OOP skills here
     
     turnLeft(robot)
     driveInches(robot, 5.5)
@@ -142,19 +135,12 @@ def path3(robot):
     robot.say_text("woah, at least that was soft").wait_for_completed()
     robot.say_text("Which way!").wait_for_completed()
 
-    #  below lines for for future use ot cube-tap navigation
-    #cube = robot.world.wait_for(cozmo.objects.EvtObjectTapped) # Tapping any cube will send him the correct way for now
-    #print(cube)
-    #num = cube.obj # this doesn't work to grab the cube number. I'm probably missing some basic OOP skills here
-
     #robot.play_audio(cozmo.audio.AudioEvents.Sfx_Constellation_Star)
     
     turnRight(robot)
     driveInches(robot, 11.25)
     robot.say_text("Ouch! this is hard!").wait_for_completed()
     robot.say_text("Now where do I go!").wait_for_completed()
-
-    #cube = robot.world.wait_for(cozmo.objects.EvtObjectTapped) # Tapping any cube will send him the correct way for now
 
     turnRight(robot)
     driveInches(robot, 6.6)
@@ -195,11 +181,6 @@ def path4(robot):
     robot.play_anim_trigger(cozmo.anim.Triggers.CodeLabTiger).wait_for_completed()
     robot.say_text("woah, at least that was soft").wait_for_completed()
     robot.say_text("Which way!").wait_for_completed()
-
-    #  below lines are for future cube-tap navigation
-    #cube = robot.world.wait_for(cozmo.objects.EvtObjectTapped) # Tapping any cube will send him the correct way for now
-    #print(cube)
-    #num = cube.obj # this doesn't work to grab the cube number. I'm probably missing some basic OOP skills here
     
     turnLeft(robot)
     driveInches(robot, 5.5)
@@ -265,6 +246,9 @@ def main(robot: cozmo.robot.Robot):
                    use_cozmo_voice=False,duration_scalar=0.6).wait_for_completed()
 
     robot.play_audio(cozmo.audio.AudioEvents.MusicGlobalStop)
+
+    resetNarration(robot)
+    robot.world.wait_for(cozmo.objects.EvtObjectTapped)
     
 ########## Run Program ##########
 cozmo.run_program(main)

@@ -1,7 +1,16 @@
 #!/usr/bin/env python3
 '''
-This is a WiP. Goal is to get Cozmo to turn a direction based on what cube is tapped.
-Right now, he just continues the correct route when any cube is tapped. See comments in main().
+TODO : Add lots of comments here for Dr. Miller to enjoy.
+TODO : Possibly place this code inside the main program and allow user to select which mode to play: auto or manual.
+Team Name
+Our Names
+Dates
+Project
+Class
+Python build used
+SDK info / other info
+
+Explanation of the program
 '''
 import cozmo
 from cozmo.util import degrees, distance_inches, speed_mmps
@@ -11,7 +20,12 @@ def victoryDance(robot):
     robot.play_anim_trigger(cozmo.anim.Triggers.CodeLabVictory).wait_for_completed()
     robot.turn_in_place(degrees(180)).wait_for_completed()
     robot.play_anim_trigger(cozmo.anim.Triggers.CodeLabVictory).wait_for_completed()
-    robot.say_text("Yay for computer science!").wait_for_completed()
+
+def resetNarration(robot):
+    robot.say_text("Please place cozmo in the starting location.", use_cozmo_voice=False,
+                   duration_scalar=0.6).wait_for_completed()
+    robot.say_text("Tap any cube when ready to continue.", use_cozmo_voice=False,
+                   duration_scalar=0.6).wait_for_completed()
 
 ########## Utility Functions ##########
 def driveInches(robot, inches):
@@ -26,44 +40,123 @@ def turnRight(robot):
 def turnLeft(robot):
     turnDegrees(robot, 90)
 
+########## Routing Functions ##########
+
+# getInput() waits for the user to tap a cube, and returns the cube id
+# 1 = left, 2 = right, 3 = reset the game
+def getInput(robot):
+    #  wait for cube press to continue - possibly add a timeout?
+    cube = robot.world.wait_for(cozmo.objects.EvtObjectTapped)
+    print("Cube ", end="")
+    print(cube.obj.object_id, end="")
+    print(" tap detected.\n", end="")
+
+    if cube.obj.object_id == 1:
+        return 1
+    elif cube.obj.object_id == 2:
+        return 2
+    elif cube.obj.object_id == 3:
+        return 3
+
+def choiceLeft(robot):
+    turnLeft(robot)
+    driveInches(robot, 5.5)
+    input = getInput(robot)
+    if input == 1:
+        choiceLeftLeft(robot)
+    elif input == 2:
+        choiceLeftRight(robot)
+    elif input == 3:
+        resetNarration(robot)
+        cube = robot.world.wait_for(cozmo.objects.EvtObjectTapped)
+
+def choiceRight(robot):
+    turnRight(robot)
+    driveInches(robot, 11)
+    input = getInput(robot)
+    if input == 1:
+        choiceRightLeft(robot)
+    elif input == 2:
+        choiceRightRight(robot)
+    elif input == 3:
+        resetNarration(robot)
+        cube = robot.world.wait_for(cozmo.objects.EvtObjectTapped)
+
+def choiceRightLeft(robot):
+    turnLeft(robot)
+    driveInches(robot, 10.75)
+    turnLeft(robot)
+    driveInches(robot, 6)
+    turnRight(robot)
+    driveInches(robot, 5.25)
+    # exit reached
+
+def choiceRightRight(robot):
+    turnRight(robot)
+    driveInches(robot, 6.6)
+    turnRight(robot)
+    driveInches(robot, 6.25)
+    robot.turn_in_place(degrees(180)).wait_for_completed()
+    driveInches(robot, 6.75)
+    turnLeft(robot)
+    driveInches(robot, 17)
+    turnLeft(robot)
+    driveInches(robot, 7)
+    turnRight(robot)
+    driveInches(robot, 5)
+    # exit reached
+
+def choiceLeftLeft(robot):
+    turnLeft(robot)
+    driveInches(robot, 6)
+    robot.turn_in_place(degrees(180)).wait_for_completed()
+    driveInches(robot, 16.25)
+    turnRight(robot)
+    driveInches(robot, 6)
+    turnRight(robot)
+    driveInches(robot, 6.25)
+    turnLeft(robot)
+    driveInches(robot, 6.75)
+    turnLeft(robot)
+    driveInches(robot, 3)
+    driveInches(robot, 6)
+    # exit reached
+
+def choiceLeftRight(robot):
+    turnRight(robot)
+    driveInches(robot, 11)
+    turnRight(robot)
+    driveInches(robot, 6)
+    turnRight(robot)
+    driveInches(robot, 6.25)
+    turnLeft(robot)
+    driveInches(robot, 6.75)
+    turnLeft(robot)
+    driveInches(robot, 3)
+    driveInches(robot, 7)
+    # exit reached
+
 ########## Main ##########
 def main(robot: cozmo.robot.Robot):
-    driveInches(robot, 9)
+    #  TODO: Add music and additional narration, unless moving this code to the main program.
+    driveInches(robot, 6.5)
     robot.say_text("Which way!").wait_for_completed()
-    cube = robot.world.wait_for(cozmo.objects.EvtObjectTapped) # Tapping any cube will send him the correct way for now
 
-    num = cube.obj # this doesn't work to grab the cube number. I'm probably missing some basic OOP skills here
+    input = getInput(robot)
+    if input == 1:
+        choiceLeft(robot)
+    elif input == 2:
+        choiceRight(robot)
+    elif input == 3:
+        resetNarration(robot)
+        cube = robot.world.wait_for(cozmo.objects.EvtObjectTapped)
+        #TODO: have this loop back to start of program
+        return
 
-    '''
-    # TODO
-    # Figure out which cube was tapped and give the next command accordingly
-    # API states: wait_for() function returns the instance of the event's "EvtObjectTapped" class,
-    # which includes a "obj" attribute, which identifies which cube has been tapped.
-    # I'm not sure how to grab that returned information. If I could, I would do something like this:
+    resetNarration(robot)
+    cube = robot.world.wait_for(cozmo.objects.EvtObjectTapped)
 
-    if <wait_for() function's returned obj value> == <the value representing cube # 1>:
-        turnLeft(robot)
-    elif <wait_for() function's returned obj value> == <the value representing cube # 2>:
-        driveInches(robot, 5)
-    elif <wait_for() function's returned obj value> == <the value representing cube # 3>:
-        turnRight(robot)
-    else:
-        robot.say_text("Couldn't detect cube tap").wait_for_completed()
-    
-    # But note that I would disallow making a turn that would take the robot backwards or into a wall.
-    # At the first "T" in the maze, I would allow only right or straight. If they go straight into the dead end,
-    # I would code the robot to drive to the dead end, turn around, make the correct turn, head to the
-    # next "T", and give the option to pick left or right. Really gotta limit choices for these pre-K kids,
-    # plus it makes the programming easier. At each turn, I would 
-    # loop over robot.world.wait_for(cozmo.objects.EvtObjectTapped) until an acceptable cube is tapped.
-    '''
 
-    turnRight(robot)
-    driveInches(robot, 9.95)  # First "T" to Second "T"
-    robot.say_text("Now where do I go!").wait_for_completed()
-    cube = robot.world.wait_for(cozmo.objects.EvtObjectTapped) # Tapping any cube will send him the correct way for now
-    turnLeft(robot)
-    driveInches(robot, 10)  # Second "T" to Finish Line
 
 ########## Run Program ##########
 cozmo.run_program(main)
