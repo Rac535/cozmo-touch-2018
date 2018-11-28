@@ -12,7 +12,6 @@ SDK info / other info
 Explanation of the program
 '''
 
-
 import random
 import cozmo
 from cozmo.util import degrees, distance_inches, speed_mmps
@@ -26,8 +25,6 @@ def victoryDance(robot):
     robot.play_anim_trigger(cozmo.anim.Triggers.CodeLabVictory).wait_for_completed()
 
     robot.play_audio(cozmo.audio.AudioEvents.MusicStyle80S1159BpmLoopStop)
-
-
 
 ########## Utility Functions ##########
 def driveInches(robot, inches):
@@ -260,9 +257,12 @@ def main(robot: cozmo.robot.Robot):
     elif roll == 4:
         path4(robot)
 
-    robot.say_text("Cozmo finally made it out of the museum",use_cozmo_voice=False,duration_scalar=0.6).wait_for_completed()
-    robot.say_text("Cozmo learned that day that if you can't see",use_cozmo_voice=False,duration_scalar=0.6).wait_for_completed()
-    robot.say_text("you might be able to feel your way out of a situation",use_cozmo_voice=False,duration_scalar=0.6).wait_for_completed()
+    robot.say_text("Cozmo finally made it out of the museum",
+                   use_cozmo_voice=False,duration_scalar=0.6).wait_for_completed()
+    robot.say_text("Cozmo learned that day that if you can't see",
+                   use_cozmo_voice=False,duration_scalar=0.6).wait_for_completed()
+    robot.say_text("you might be able to feel your way out of a situation",
+                   use_cozmo_voice=False,duration_scalar=0.6).wait_for_completed()
 
     robot.play_audio(cozmo.audio.AudioEvents.MusicGlobalStop)
     
