@@ -568,7 +568,7 @@ def main(robot: cozmo.robot.Robot):
         if modeSelect == cube1.object_id:
             robot.say_text("Automatic mode selected.",
                            use_cozmo_voice=False, duration_scalar=0.6).wait_for_completed()
-            #playIntro(robot) # TODO uncomment
+            #playIntro(robot)
             robot.play_audio(cozmo.audio.AudioEvents.MusicFunLoop)  # start music
 
             # choose a path randomly
@@ -589,7 +589,7 @@ def main(robot: cozmo.robot.Robot):
         elif modeSelect == cube2.object_id:
             robot.say_text("Manual mode selected.",
                            use_cozmo_voice=False, duration_scalar=0.6).wait_for_completed()
-            #playIntro(robot) # TODO uncomment
+            #playIntro(robot)
             robot.say_text("Tap a cube when Cozmo asks where to go.",
                            use_cozmo_voice=False, duration_scalar=0.6).wait_for_completed()
             robot.play_audio(cozmo.audio.AudioEvents.MusicFunLoop)  # start music
