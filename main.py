@@ -225,6 +225,7 @@ def getInput(robot):
     x = 0
     while 1:
         try:
+            print("Awaiting cube tap...")
             cube = robot.world.wait_for(cozmo.objects.EvtObjectTapped, timeout=15)
             break
         except asyncio.TimeoutError:
@@ -238,11 +239,11 @@ def getInput(robot):
                            , use_cozmo_voice=False, duration_scalar=0.6).wait_for_completed()
 
     if cube.obj.object_id == cube1.object_id:
-        print("Cube 1 pressed.")
+        print("Cube 1 tapped.")
     elif cube.obj.object_id == cube2.object_id:
-        print("Cube 2 pressed.")
+        print("Cube 2 tapped.")
     elif cube.obj.object_id == cube3.object_id:
-        print("Cube 3 pressed.")
+        print("Cube 3 tapped.")
 
     darkCubes(robot)
     return(cube.obj.object_id)
@@ -534,9 +535,20 @@ def main(robot: cozmo.robot.Robot):
     cube1 = robot.world.get_light_cube(LightCube1Id)
     cube2 = robot.world.get_light_cube(LightCube2Id)
     cube3 = robot.world.get_light_cube(LightCube3Id)
-    print(cube1.object_id)
-    print(cube2.object_id)
-    print(cube3.object_id)
+
+    #Check cube connections, print error and exit if any cubes are not found.
+    print("Checking cube connections...")
+    if cube1 is None:
+        print("Cube connection error (Cube 1).")
+        return
+    if cube2 is None:
+        print("Cube connection error (Cube 2).")
+        return
+    if cube3 is None:
+        print("Cube connection error (Cube 3).")
+        return
+    print("Found all 3 cubes!")
+
     robot.say_text("Welcome." , use_cozmo_voice=False, duration_scalar=0.6).wait_for_completed()
 
     # main program loop, repeats until user quits or input timeout occurs
@@ -612,12 +624,13 @@ def main(robot: cozmo.robot.Robot):
                     break
                 except asyncio.TimeoutError:
                     x += 1
-                    print("Awaiting any cube tap.")
+                    print("Awaiting any cube tap...")
                     if x == 4:
                         darkCubes(robot)
                         print("Input timeout detected. Shutting down.")
                         quitProgram == 1
                         exitNarration(robot)
+                        return
 
                     resetNarration(robot)
 
