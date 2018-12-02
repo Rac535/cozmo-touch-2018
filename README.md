@@ -21,3 +21,15 @@ This will create a new file in the project's directory called `cozmos_night_at_t
 1. [Install iTunes](https://www.apple.com/itunes/download/)
 2. Unzip `cozmos_night_at_the_museum.zip`
 3. Run the `cozmos_night_at_the_museum/windows_and_ios.ps1` PowerShell script
+
+### Summary of Required Steps to Install without Package:
+On Windows, requires at least 9 steps and usage of the command line.
+```
+# Install git (multiple steps)
+# Install python3 (multiple steps)
+pip3 install --user 'cozmo[camera]'
+# Install iTunes or ADB (multiple steps)
+git clone git@github.com:Rac535/cozmo-touch-2018.git
+cd cozmo-touch-2018
+python main.py
+```
