@@ -13,8 +13,8 @@ exit()
 """.encode()
 
 def clean():
-    rmtree('build')
-    rmtree('dist')
+    rmtree('build', ignore_errors=True)
+    rmtree('dist', ignore_errors=True)
 
 def get_cozmoclad_path():
     process = Popen(['pipenv', 'run', 'python'], stdout=PIPE, stdin=PIPE)
