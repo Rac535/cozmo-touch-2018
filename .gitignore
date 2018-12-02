@@ -1,3 +1,5 @@
 dist/
 build/
 main.spec
+*.zip
+.DS_Store

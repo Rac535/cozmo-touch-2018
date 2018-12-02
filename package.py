@@ -1,6 +1,6 @@
 #! /usr/bin/python
 import os
-from zipfile import ZipFile
+from zipfile import ZipFile, ZIP_DEFLATED
 from subprocess import call, Popen, PIPE
 from shutil import rmtree
 
@@ -26,17 +26,18 @@ def build_executable_file():
     process = call([
         'pipenv', 'run', 'pyinstaller',
         '--console',
+        '--onefile',
         '--paths=' + get_cozmoclad_path(),
         'main.py'
     ])
 
-def zip_dir(zip, dir):
+def zipdir(zip, dir):
     for root, dirs, files in os.walk(dir):
         for file in files:
             zip.write(os.path.join(root, file))
 
 def zip_all_the_things():
-    zip = ZipFile('cozmos_night_at_the_museum.zip', 'w', zipfile.ZIP_DEFLATED)
+    zip = ZipFile('cozmos_night_at_the_museum.zip', 'w', ZIP_DEFLATED)
     zip.write('windows_and_android.ps1')
     zipdir(zip, 'platform-tools')
     zipdir(zip, 'dist')
