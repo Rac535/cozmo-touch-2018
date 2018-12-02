@@ -5,7 +5,7 @@ In order to build a package for Windows, the following requirements must be met:
 1. You are using a machine running Windows
 2. You have installed `pipenv` ([installation instructions](https://pipenv.readthedocs.io/en/latest/install/#installing-pipenv))
 
-If you've met the above requirements, then simply run the following two shell commands:
+If you've met the above requirements, then simply run the following two commands in PowerShell:
 ```bash
 $ pipenv install
 $ ./package.py
