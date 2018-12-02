@@ -39,6 +39,7 @@ def zipdir(zip, dir):
 def zip_all_the_things():
     zip = ZipFile('cozmos_night_at_the_museum.zip', 'w', ZIP_DEFLATED)
     zip.write('windows_and_android.ps1')
+    zip.write('windows_and_ios.ps1')
     zipdir(zip, 'platform-tools')
     zipdir(zip, 'dist')
     zip.close()
