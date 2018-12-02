@@ -11,7 +11,7 @@ $ pipenv install
 $ ./package.py
 ```
 
-This will create a new file in the project's directory called `cozmos_night_at_the_museum.zip`. This ZIP file contains all the necessary files to run the code on Windows with an Android, and requires no extra setup. To run the code on Windows with an iOS device, the only extra setup required is an iTunes installation.
+This will create a new file in the project's directory called `cozmos_night_at_the_museum.zip`. This ZIP file contains all the necessary files to run the code on Windows with an Android device, and requires no extra setup. To run the code on Windows with an iOS device, the only extra setup required is an iTunes installation.
 
 ## Running the Package on Windows with an Android Device
 1. Unzip `cozmos_night_at_the_museum.zip`
