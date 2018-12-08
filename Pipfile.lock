@@ -28,20 +28,21 @@
                 "camera"
             ],
             "hashes": [
-                "sha256:4c071db706d75ff6d2323c4b37aac038943151e7cd54a662a7f88e0e5bea176c"
+                "sha256:b818fcb177743ffdad8a0d2c125b91e538f0930aef409dfeab10d08148ab300d"
             ],
             "index": "pypi",
-            "version": "==1.4.6"
+            "version": "==1.4.7"
         },
         "cozmoclad": {
             "hashes": [
-                "sha256:6b2e64306f8cf2f31db20696606b646eb8d61ddc1e34b6b87abae0053ef3e00e"
+                "sha256:c489b91de91b356652607de23ab365d6b35f075e5331f2e513994d1a1e31a891"
             ],
             "index": "pypi",
-            "version": "==3.0.1"
+            "version": "==3.1.0"
         },
         "future": {
             "hashes": [
+                "sha256:1138e1c6c539e1dc07854e5ed5511a30b13c0b6891ee65a12857e89f6d61e1b8",
                 "sha256:67045236dcfd6816dc439556d009594abf643e5eb48992e36beac09c2ca659b8"
             ],
             "version": "==0.17.1"
@@ -133,6 +134,13 @@
             ],
             "index": "pypi",
             "version": "==3.4"
+        },
+        "pywin32-ctypes": {
+            "hashes": [
+                "sha256:24ffc3b341d457d48e8922352130cf2644024a4ff09762a2261fd34c36ee5942",
+                "sha256:9dc2d991b3479cc2df15930958b674a48a227d5361d413827a4cfd0b5876fc98"
+            ],
+            "version": "==0.2.0"
         }
     },
     "develop": {}
