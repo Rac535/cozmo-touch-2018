@@ -28,6 +28,9 @@ Environment
     Windows 10 10.0
     Uses Anki's Cozmo SDK:
         http://cozmosdk.anki.com/docs/
+        Updated SDK on 12-8-18 to:
+            cozmo-1.4.7
+            cozmoclad-3.1.0
     And associated API:
         http://cozmosdk.anki.com/docs/api.html
     Built and tested using Andriod OS on a Samsung Galaxy S8 with Android Debug Bridge:
@@ -314,7 +317,7 @@ def choiceRightRight(robot):
     hitWall(robot, "C4")
     turnRight(robot)
     robot.say_text("There's the exit sign!").wait_for_completed()
-    driveInches(robot, 7.25)
+    driveInches(robot, 5.75)
     # exit reached
     robot.play_audio(cozmo.audio.AudioEvents.MusicGlobalStop)
     victoryDance(robot)
@@ -394,7 +397,7 @@ def autoPath1(robot):
     turnRight(robot)
     robot.say_text("I can see the exit sign!", duration_scalar=0.6).wait_for_completed()
     robot.say_text("Cozmo is almost there", use_cozmo_voice=False, duration_scalar=0.6).wait_for_completed()
-    driveInches(robot, 7)
+    driveInches(robot, 6)
 
     # PounceOnMotion = _BehaviorType(name='PounceOnMotion', id=6)  # I think this was commented when I started -(Mike B)
     robot.play_audio(cozmo.audio.AudioEvents.MusicFunLoopStop)
@@ -532,6 +535,7 @@ def main(robot: cozmo.robot.Robot):
     quitProgram = 0  # this flag is set to 1 when the user tapes cube3 to quit
     # Store cube objects in order to compare their cube id's, whatever they are, to input tap cube id's
     global cube1, cube2, cube3
+
     cube1 = robot.world.get_light_cube(LightCube1Id)
     cube2 = robot.world.get_light_cube(LightCube2Id)
     cube3 = robot.world.get_light_cube(LightCube3Id)
@@ -614,7 +618,7 @@ def main(robot: cozmo.robot.Robot):
         if modeSelect != cube3.object_id:
             x = 0
             resetNarration(robot)
-            # try loop will wait for user input, reminding user every 15 seconds.
+            # try loop will wait for user input, reminding user every 20 seconds.
             # if one minute passes without input, program will exit
             while 1:
                 try:
